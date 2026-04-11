@@ -6,63 +6,66 @@ import list.ArrayList;
 
 
 public class Lector {
-	
+
 	private int nSocio;
 	private String nombre;
 	private ArrayList<Libro> historicoLectura;
-	
+
+	//Constructor
 	public Lector(int nSocio, String nombre) {
 		this.nSocio = nSocio;
 		this.nombre = nombre;
 		historicoLectura = new ArrayList<Libro>();
 	}
-	
+
+	//Getters
 	public int getNSocio() {
 		return nSocio;
 	}
-	
+
 	public String getNombre() {
 		return nombre;
 	}
-	
-	public Libro getLibroLeido(int indiceHistorico) {
-		Libro leido;
-		if(indiceHistorico == 1) {
-			leido = historicoLectura.get(0);
-		} else if(indiceHistorico <= 10 && indiceHistorico > 1) {
-			leido = historicoLectura.get(indiceHistorico - 1);
-		} else {
-			leido = null;
+
+	public Libro getLibroLeido(int posicion) {
+		Libro libro=null;
+
+		if(posicion>=1 && posicion<=historicoLectura.size()) {
+			libro = historicoLectura.get(posicion-1);
 		}
-		return leido;
+
+		return libro;
 	}
-	
-	public void leerLibro(Libro libroLeido) {
+
+	//Otros Métodos
+	public void leerLibro(Libro libro) {
+		libro.prestado();
+
 		if(historicoLectura.size() < 10) {
-			historicoLectura.add(historicoLectura.size(), libroLeido);
-		} else if(historicoLectura.size() == 10){
-			for(int i = 1; i < historicoLectura.size(); i++) {
-				historicoLectura.set(i-1, historicoLectura.get(i));
-			}
-			historicoLectura.add(historicoLectura.size(), libroLeido);
+			historicoLectura.add(historicoLectura.size(), libro);
+		}
+
+		else {
+			historicoLectura.removeElementAt(0);	
+			historicoLectura.add(historicoLectura.size(), libro);
 		}
 	}
-	
+
 	private boolean esIgual(Lector obj) {
-		boolean historicoIgual = false;
-		if(historicoLectura.size() == obj.historicoLectura.size()) {
-			for(int i = 0; i < historicoLectura.size(); i++) {
-				if(historicoLectura.get(i).equals(obj.historicoLectura.get(i))) {
-					historicoIgual = true;
-				}
+		boolean historicoIgual = historicoLectura.size() == obj.historicoLectura.size();
+
+		if(historicoIgual) {
+			for(int i = 1; i <= historicoLectura.size() && historicoIgual; i++) {
+				historicoIgual = getLibroLeido(i).equals(obj.getLibroLeido(i));
 			}
 		}
-		return historicoIgual && nSocio == obj.getNSocio();
+
+		return historicoIgual && nSocio == obj.nSocio;
 	}
-	
-  
-  
-  /**
+
+
+
+	/**
 	 * Indica si este libro es igual a otro
 	 * PRE: Cierto
 	 * Retorna cierto si los libros coincide: 
@@ -73,14 +76,14 @@ public class Lector {
 	 */
 	@Override
 	public boolean equals (Object otro) {
-		
+
 		if (!(otro instanceof Lector))
 		{
-		 return false;
+			return false;
 		}
-		
+
 		Lector comparar = (Lector) otro;
 		return this.esIgual(comparar);
 	}
-  
+
 }
