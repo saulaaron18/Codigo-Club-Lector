@@ -17,6 +17,22 @@ public class Libro {
 	private Fecha fechaPublicacion;
 	private int nVecesPrestado;
 	
+	// CONSTRUCTORES
+	public Libro(String titulo, String autor, Fecha fechaPublicacion) {
+		this.titulo = titulo;
+		this.autor = autor;
+		this.fechaPublicacion = fechaPublicacion;
+		this.nVecesPrestado = 0;
+	}
+	
+	public Libro(Libro obj) {
+		this.titulo = obj.titulo;
+		this.autor = obj.autor;
+		this.fechaPublicacion = new Fecha(obj.fechaPublicacion);
+		this.nVecesPrestado = obj.nVecesPrestado;
+	}
+	
+	//GETTERS
 	public String getTitulo() {
 		return titulo;
 	}
@@ -33,27 +49,14 @@ public class Libro {
 		return nVecesPrestado;
 	}
 	
-	public Libro(String titulo, String autor, Fecha fechaPublicacion, int nVecesPrestado) {
-		this.titulo = titulo;
-		this.autor = autor;
-		this.fechaPublicacion = fechaPublicacion;
-		this.nVecesPrestado = 0;
-	}
-	
-	public Libro(Libro obj) {
-		this.titulo = obj.getTitulo();
-		this.autor = obj.getAutor();
-		this.fechaPublicacion = new Fecha(obj.getFechaPublicacion());
-		this.nVecesPrestado = obj.getNVecesPrestado();
-	}
-	
+	//OTROS MÉTODOS
 	public void prestado() {
 		this.nVecesPrestado += 1;
 	}
 	
 	private boolean esIgual(Libro obj) {
-		return this.titulo.compareTo(obj.getTitulo()) == 0 &&
-				this.autor.compareTo(obj.getAutor()) == 0 &&
+		return this.titulo.equals(obj.titulo) &&
+				this.autor.equals(obj.autor) &&
 				this.fechaPublicacion.equals(obj.getFechaPublicacion());
 	}
 
