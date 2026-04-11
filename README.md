@@ -15,8 +15,8 @@
 
 - Constructor: (String titulo, String autor, Fecha fechaPublicacion) []
 - Constructor Copia: (Libro otroLibro) []
-- Get titulo, autor, fecha publicación, nVecesPrestado: 
-- Prestado
+- Get titulo, autor, fecha publicación, nVecesPrestado: () [] getters normales
+- Prestado: 
 - EsIgual: método privado que se implementa en conjunto con el ya definido equals
 
 ## Clase Lector
