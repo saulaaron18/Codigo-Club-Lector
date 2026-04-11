@@ -15,9 +15,10 @@
 
 - Constructor: (String titulo, String autor, Fecha fechaPublicacion) []
 - Constructor Copia: (Libro otroLibro) []
-- Get titulo, autor, fecha publicación, nVecesPrestado: () [] getters normales
-- Prestado: 
-- EsIgual: método privado que se implementa en conjunto con el ya definido equals
+- Get titulo, autor, fecha publicación, nVecesPrestado: () getters de los atributos
+- Prestado: () [void] incrementa en 1 el objeto libro
+- EsIgual: (Libro otroLibro) [boolean] método privado que se implementa en conjunto con el ya definido equals.
+  Dos libros son iguales si coinciden en el título, el autor y la fecha de publicación
 
 ## Clase Lector
 
@@ -30,8 +31,9 @@
 
 ### Funciones
 
-- Constructor
-- getnSocio, getNombre, getHistoricoLecturo: getters de los atributos
-- getlibroLeido: el libro que se encuentra en el histórico en la posición que se recibe como parámetro
+- Constructor: (int nSocio, String nombre) [] además se ha de inicializar historicoLectura
+- getnSocio, getNombre, getHistoricoLecturo: () getters de los atributos
+- getlibroLeido: (int posicion) [Libro] el libro que se encuentra en el histórico en la posición que se recibe como parámetro
 - leerLibro: 
-- esIgual: (return boolean) [] método privado
+- esIgual: (Lector otroLector) [boolean] método privado que se implementa en conjunto con el ya definido equals.
+Dos lectores son iguales si coinciden en el nSocio y el orden de los libros en el historicoLectura. (_El nombre no importa_) 
